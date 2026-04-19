@@ -32,7 +32,7 @@ Since the application is built entirely on client-side technologies, no local se
 
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/mohamedhashim2003/Earth-Day.git
+    git clone https://github.com/mohamedhashim2003/Earth-Day-2026.git
     ```
 2.  Open `index.html` in any modern web browser to view the application locally.
 3.  **To Deploy:** Go to your repository settings on GitHub, navigate to **Pages**, and set the source to deploy from the `main` branch.
