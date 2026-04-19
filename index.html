@@ -1,219 +1,1336 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GU Energy Conservation Initiative</title>
-    <style>
-        /* Core Styling */
-        :root {
-            --primary-color: #2e7d32;
-            --primary-hover: #1b5e20;
-            --bg-color: #f4f9f4;
-            --card-bg: #ffffff;
-            --text-main: #333333;
-            --text-muted: #666666;
-            --accent: #ffeb3b;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Egypt Energy Crisis — Earth Day 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #f5f0e8;
+    --ash: #e8e2d6;
+    --carbon: #1a1612;
+    --ember: #d94f1e;
+    --heat: #f0891a;
+    --gold: #e8c547;
+    --nile: #2d6e8f;
+    --green: #3a7d44;
+    --smoke: #8a8278;
+    --white: #fafaf8;
+  }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .container {
-            max-width: 700px;
-            width: 100%;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            position: relative;
-            overflow: hidden;
-        }
+  html { scroll-behavior: smooth; }
 
-        /* View Management */
-        .view {
-            display: none;
-            animation: fadeIn 0.4s ease-in-out;
-        }
-        .view.active {
-            display: block;
-        }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--carbon);
+    color: var(--sand);
+    overflow-x: hidden;
+  }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+  /* ─── LANDING PAGE ─── */
+  #landing {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 40px 24px;
+    background: var(--carbon);
+    overflow: hidden;
+  }
 
-        /* Landing Page Specifics */
-        .hero-icon {
-            font-size: 60px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .mission-text {
-            font-size: 18px;
-            line-height: 1.6;
-            text-align: center;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-        }
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(245,240,232,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,240,232,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
 
-        /* Buttons */
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            text-align: center;
-        }
-        .btn:hover { background-color: var(--primary-hover); }
-        .btn-outline {
-            background-color: transparent;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-            margin-bottom: 20px;
-            width: auto;
-            display: inline-block;
-            padding: 8px 16px;
-            font-size: 14px;
-        }
-        .btn-outline:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
+  .bg-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(217,79,30,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
 
-        /* Simulator Grid */
-        h1 { color: var(--primary-color); text-align: center; margin-top: 0; }
-        .subtitle { text-align: center; color: var(--text-muted); margin-bottom: 30px; }
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+  }
 
-        .device-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        .device-btn {
-            background: #e8f5e9;
-            border: 2px solid var(--primary-color);
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            color: var(--primary-color);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .device-btn:hover, .device-btn.selected { 
-            background: var(--primary-color); 
-            color: white; 
-        }
+  .badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ember);
+    border: 1px solid rgba(217,79,30,0.4);
+    padding: 6px 16px;
+    margin-bottom: 32px;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 1s ease 0.2s both;
+  }
 
-        /* Results Panel */
-        .dashboard {
-            background: #212121;
-            color: #4caf50;
-            padding: 25px;
-            border-radius: 8px;
-            text-align: left;
-            display: none; 
-        }
-        .dashboard h2 { margin-top: 0; color: white; border-bottom: 1px solid #444; padding-bottom: 10px; }
-        .metric { font-size: 18px; margin: 12px 0; }
-        .highlight { font-weight: bold; color: var(--accent); }
-    </style>
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 0.95;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 1s ease 0.4s both;
+    max-width: 900px;
+  }
+
+  .hero-title .line1 { color: var(--sand); }
+  .hero-title .line2 { color: var(--ember); font-style: italic; }
+  .hero-title .line3 { color: var(--smoke); font-size: 0.7em; }
+
+  .hero-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--smoke);
+    text-align: center;
+    max-width: 560px;
+    line-height: 1.7;
+    margin: 28px 0 56px;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 1s ease 0.6s both;
+  }
+
+  .hero-sub strong { color: var(--gold); font-weight: 500; }
+
+  .cta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 740px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 1s ease 0.8s both;
+  }
+
+  @media (max-width: 600px) {
+    .cta-grid { grid-template-columns: 1fr; }
+  }
+
+  .cta-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px 28px 24px;
+    border: 1px solid rgba(245,240,232,0.12);
+    background: rgba(245,240,232,0.03);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .cta-btn.btn-debt::before { background: linear-gradient(135deg, rgba(217,79,30,0.12), transparent); }
+  .cta-btn.btn-temp::before { background: linear-gradient(135deg, rgba(45,110,143,0.12), transparent); }
+
+  .cta-btn:hover { border-color: rgba(245,240,232,0.3); transform: translateY(-2px); }
+  .cta-btn:hover::before { opacity: 1; }
+
+  .btn-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .btn-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .btn-debt .btn-tag { color: var(--ember); }
+  .btn-temp .btn-tag { color: var(--nile); }
+
+  .btn-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--sand);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .btn-desc {
+    font-size: 13px;
+    color: var(--smoke);
+    line-height: 1.6;
+  }
+
+  .btn-arrow {
+    margin-top: 20px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.2s ease;
+  }
+
+  .btn-debt .btn-arrow { color: var(--ember); }
+  .btn-temp .btn-arrow { color: var(--nile); }
+
+  .cta-btn:hover .btn-arrow { gap: 14px; }
+
+  .live-ticker {
+    position: relative;
+    z-index: 1;
+    margin-top: 56px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--smoke);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: fadeIn 1s ease 1s both;
+  }
+
+  .ticker-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--ember);
+    animation: blink 1.4s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SECTION BASE ─── */
+  .section {
+    min-height: 100vh;
+    display: none;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .section.active { display: flex; }
+
+  .back-btn {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    z-index: 100;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--smoke);
+    background: rgba(26,22,18,0.9);
+    border: 1px solid rgba(245,240,232,0.12);
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    backdrop-filter: blur(8px);
+    display: none;
+  }
+
+  .back-btn.visible { display: block; }
+  .back-btn:hover { color: var(--sand); border-color: rgba(245,240,232,0.3); }
+
+  /* ─── ENERGY DEBT CLOCK ─── */
+  #debt-section {
+    background: var(--carbon);
+  }
+
+  .debt-hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .debt-bg-radial {
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 60%;
+    background: radial-gradient(ellipse at 50% 0%, rgba(217,79,30,0.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .section-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ember);
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-badge::before, .section-badge::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--ember);
+    opacity: 0.5;
+  }
+
+  .debt-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 6vw, 72px);
+    text-align: center;
+    line-height: 1.05;
+    max-width: 800px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 16px;
+  }
+
+  .debt-subtitle {
+    font-size: 15px;
+    color: var(--smoke);
+    text-align: center;
+    max-width: 500px;
+    line-height: 1.7;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* MAIN CLOCK */
+  .clock-container {
+    width: 100%;
+    max-width: 900px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 60px;
+  }
+
+  .clock-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--smoke);
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .clock-display {
+    background: rgba(217,79,30,0.06);
+    border: 1px solid rgba(217,79,30,0.2);
+    padding: 36px 40px;
+    text-align: center;
+    position: relative;
+  }
+
+  .clock-display::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--ember), transparent);
+  }
+
+  .clock-number {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: 700;
+    color: var(--ember);
+    letter-spacing: -2px;
+    line-height: 1;
+    transition: color 0.1s;
+  }
+
+  .clock-unit {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--smoke);
+    margin-top: 8px;
+  }
+
+  /* STATS ROW */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(245,240,232,0.06);
+    border: 1px solid rgba(245,240,232,0.06);
+    max-width: 900px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 60px;
+  }
+
+  @media (max-width: 600px) {
+    .stats-row { grid-template-columns: 1fr; }
+  }
+
+  .stat-cell {
+    background: var(--carbon);
+    padding: 28px 24px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Space Mono', monospace;
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--smoke);
+    line-height: 1.5;
+  }
+
+  /* PERSONAL CALCULATOR */
+  .calc-section {
+    width: 100%;
+    max-width: 700px;
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  .calc-header {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 8px;
+    color: var(--sand);
+  }
+
+  .calc-sub {
+    font-size: 13px;
+    color: var(--smoke);
+    text-align: center;
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+
+  .calc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 500px) {
+    .calc-grid { grid-template-columns: 1fr; }
+  }
+
+  .calc-item label {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--smoke);
+    margin-bottom: 8px;
+  }
+
+  .calc-item select,
+  .calc-item input {
+    width: 100%;
+    background: rgba(245,240,232,0.04);
+    border: 1px solid rgba(245,240,232,0.12);
+    color: var(--sand);
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .calc-item select:focus,
+  .calc-item input:focus {
+    border-color: rgba(217,79,30,0.5);
+  }
+
+  .calc-item select option { background: #2a2420; }
+
+  .calc-submit {
+    width: 100%;
+    background: var(--ember);
+    color: var(--white);
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: none;
+    padding: 18px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .calc-submit:hover { background: #c44318; }
+
+  .guilt-result {
+    margin-top: 32px;
+    padding: 28px;
+    border: 1px solid rgba(217,79,30,0.3);
+    background: rgba(217,79,30,0.05);
+    display: none;
+    animation: fadeIn 0.5s ease both;
+  }
+
+  .guilt-result.show { display: block; }
+
+  .guilt-headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--ember);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .guilt-line {
+    font-size: 14px;
+    color: var(--ash);
+    line-height: 1.8;
+    margin-bottom: 8px;
+  }
+
+  .guilt-line strong { color: var(--gold); }
+
+  .guilt-action {
+    margin-top: 20px;
+    padding: 16px;
+    background: rgba(58,125,68,0.1);
+    border-left: 3px solid var(--green);
+    font-size: 13px;
+    color: var(--ash);
+    line-height: 1.7;
+  }
+
+  /* ─── 2°C COUNTDOWN ─── */
+  #temp-section {
+    background: #0d1a2a;
+  }
+
+  .temp-hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .temp-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(45,110,143,0.2) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .temp-badge { color: var(--nile); }
+  .temp-badge::before, .temp-badge::after { background: var(--nile); }
+
+  .temp-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 6vw, 68px);
+    text-align: center;
+    line-height: 1.05;
+    max-width: 800px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 16px;
+    color: var(--sand);
+  }
+
+  .temp-subtitle {
+    font-size: 15px;
+    color: var(--smoke);
+    text-align: center;
+    max-width: 500px;
+    line-height: 1.7;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* THERMOMETER SKIN */
+  .skin-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 60px;
+  }
+
+  .skin-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--smoke);
+    margin-bottom: 20px;
+  }
+
+  .skin-visual {
+    position: relative;
+    width: 280px;
+    height: 320px;
+  }
+
+  /* SVG thermometer arm */
+  .skin-arm-svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .temp-reading {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+
+  .temp-reading .temp-val {
+    font-family: 'Space Mono', monospace;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1;
+    transition: color 0.8s ease;
+  }
+
+  .temp-reading .temp-unit {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: var(--smoke);
+    margin-top: 4px;
+  }
+
+  /* BEHAVIOR TRACKER */
+  .behavior-section {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .behavior-header {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 8px;
+    color: var(--sand);
+  }
+
+  .behavior-sub {
+    font-size: 13px;
+    color: var(--smoke);
+    text-align: center;
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+
+  .behavior-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .behavior-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    border: 1px solid rgba(245,240,232,0.08);
+    background: rgba(255,255,255,0.02);
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+  }
+
+  .behavior-item:hover { border-color: rgba(245,240,232,0.2); }
+
+  .behavior-item.on {
+    border-color: rgba(58,125,68,0.5);
+    background: rgba(58,125,68,0.07);
+  }
+
+  .behavior-item.harmful {
+    border-color: rgba(217,79,30,0.5);
+    background: rgba(217,79,30,0.07);
+  }
+
+  .beh-icon { font-size: 22px; flex-shrink: 0; }
+
+  .beh-text { flex: 1; }
+
+  .beh-name {
+    font-size: 14px;
+    color: var(--sand);
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .beh-detail {
+    font-size: 12px;
+    color: var(--smoke);
+    line-height: 1.5;
+  }
+
+  .beh-impact {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .beh-toggle {
+    width: 44px;
+    height: 24px;
+    border-radius: 12px;
+    background: rgba(245,240,232,0.1);
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+
+  .beh-toggle::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--smoke);
+    transition: all 0.2s;
+  }
+
+  .behavior-item.on .beh-toggle { background: var(--green); }
+  .behavior-item.on .beh-toggle::after { left: 23px; background: white; }
+
+  .behavior-item.harmful .beh-toggle { background: var(--ember); }
+  .behavior-item.harmful .beh-toggle::after { left: 23px; background: white; }
+
+  /* RESULT PANEL */
+  .temp-result {
+    padding: 28px;
+    border: 1px solid rgba(45,110,143,0.3);
+    background: rgba(45,110,143,0.05);
+    text-align: center;
+  }
+
+  .temp-result-headline {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .temp-result-body {
+    font-size: 14px;
+    color: var(--ash);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .temp-result-body strong { color: var(--gold); }
+
+  .timeline-bar {
+    height: 6px;
+    background: rgba(245,240,232,0.08);
+    border-radius: 3px;
+    margin: 20px 0 8px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .timeline-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 1s ease, background 1s ease;
+  }
+
+  .timeline-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--smoke);
+    letter-spacing: 1px;
+  }
+
+  /* ─── FOOTER NAV ─── */
+  .section-nav {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 24px 48px;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid rgba(245,240,232,0.06);
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .nav-link {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--smoke);
+    cursor: pointer;
+    padding: 8px 0;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .nav-link:hover { color: var(--sand); border-bottom-color: var(--ember); }
+
+  .galala-credit {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--smoke);
+    opacity: 0.5;
+    text-align: center;
+    padding: 0 24px 32px;
+    letter-spacing: 1px;
+  }
+</style>
 </head>
 <body>
 
-<div class="container">
-    
-    <div id="view-landing" class="view active">
-        <div class="hero-icon">🌍</div>
-        <div class="mission-text">
-            "An open idea for students aimed at promoting a culture of energy conservation in society through innovative and applicable ideas, linking engineering knowledge with practical, real-world solutions on how to reduce energy consumption to change daily behavior toward more efficient energy use. Simplify energy concepts in an engaging way."
-        </div>
-        <button class="btn" onclick="switchView('view-simulator')">Launch Virtual Kiosk</button>
-    </div>
+<button class="back-btn" id="backBtn" onclick="showLanding()">← Back</button>
 
-    <div id="view-simulator" class="view">
-        <button class="btn btn-outline" onclick="switchView('view-landing')">← Back to Mission</button>
-        
-        <h1>🔌 Virtual Energy Kiosk</h1>
-        <p class="subtitle">Select a device below to reveal its hidden annual energy cost if left running or on standby for 8 hours a day.</p>
+<!-- ═══════════════════════════════════════════
+     LANDING PAGE
+════════════════════════════════════════════ -->
+<div id="landing">
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
 
-        <div class="device-grid">
-            <button class="device-btn" onclick="calculateEnergy('Phone Charger (Standby)', 5, 'Vampire power drain!')">Phone Charger</button>
-            <button class="device-btn" onclick="calculateEnergy('Gaming Console', 200, 'A heavy hitter for entertainment.')">Gaming Console</button>
-            <button class="device-btn" onclick="calculateEnergy('Space Heater', 1500, 'Massive energy draw.')">Space Heater</button>
-            <button class="device-btn" onclick="calculateEnergy('Desktop PC', 400, 'Don\'t leave it on overnight!')">Desktop PC</button>
-        </div>
+  <div class="badge">Earth Day 2026 · Galala University · College of Engineering</div>
 
-        <div class="dashboard" id="dashboard">
-            <h2 id="dev-name">Device Name</h2>
-            <p id="dev-note" style="color: #ccc; font-style: italic; margin-top: -5px;"></p>
-            <div class="metric">⚡ Power Draw: <span class="highlight" id="wattage">0</span> Watts</div>
-            <div class="metric">🔋 Yearly Energy: <span class="highlight" id="kwh">0</span> kWh</div>
-            <hr style="border-color: #444; margin: 20px 0;">
-            <div class="metric">☕ Equals: <span class="highlight" id="coffee">0</span> Cups of Campus Coffee</div>
-            <div class="metric">🚗 Equals: <span class="highlight" id="drive">0</span> km driven in an EV</div>
-        </div>
-    </div>
+  <h1 class="hero-title">
+    <span class="line1">Egypt is bleeding</span><br>
+    <span class="line2">energy.</span><br>
+    <span class="line3">Every second you wait.</span>
+  </h1>
 
+  <p class="hero-sub">
+    Egypt generates <strong>~160 TWh</strong> of electricity per year.
+    <strong>18–22% is lost</strong> before it reaches a single lightbulb.
+    Another 15% vanishes in inefficient habits.
+    This is not an abstraction. It is happening right now.
+  </p>
+
+  <div class="cta-grid">
+    <a class="cta-btn btn-debt" href="#" onclick="showSection('debt-section'); return false;">
+      <span class="btn-icon">⚡</span>
+      <span class="btn-tag">Tool 01 · The Debt Clock</span>
+      <span class="btn-title">Egypt's Energy Debt Clock</span>
+      <span class="btn-desc">Watch Egypt's wasted electricity accumulate in real time — then discover your personal share of the national debt.</span>
+      <span class="btn-arrow">Enter →</span>
+    </a>
+
+    <a class="cta-btn btn-temp" href="#" onclick="showSection('temp-section'); return false;">
+      <span class="btn-icon">🌡️</span>
+      <span class="btn-tag">Tool 02 · The 2°C Countdown</span>
+      <span class="btn-title">Your Skin is the Thermometer</span>
+      <span class="btn-desc">Track your daily choices. Watch global temperature rise on a human body. Feel the number — not just see it.</span>
+      <span class="btn-arrow">Enter →</span>
+    </a>
+  </div>
+
+  <div class="live-ticker">
+    <div class="ticker-dot"></div>
+    <span id="landing-waste">Calculating live waste...</span>
+  </div>
 </div>
 
+<!-- ═══════════════════════════════════════════
+     SECTION 1: ENERGY DEBT CLOCK
+════════════════════════════════════════════ -->
+<div id="debt-section" class="section">
+  <div class="debt-hero">
+    <div class="debt-bg-radial"></div>
+
+    <div class="section-badge">Tool 01 · Live Data</div>
+
+    <h2 class="debt-title">Egypt's Energy Debt Clock</h2>
+    <p class="debt-subtitle">
+      Since you opened this tab, Egypt has wasted this much electricity —
+      real figures, derived from official Egyptian Electricity Regulatory Authority data.
+    </p>
+
+    <!-- Main clock -->
+    <div class="clock-container">
+      <div class="clock-label">Total wasted electricity since page load</div>
+      <div class="clock-display">
+        <div class="clock-number" id="debt-kwh">0.000</div>
+        <div class="clock-unit">MWh WASTED</div>
+      </div>
+    </div>
+
+    <!-- Stats row -->
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="stat-num" id="stat-mwh-sec">5.93</div>
+        <div class="stat-label">MWh wasted<br>per second</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num" id="stat-co2">0.000</div>
+        <div class="stat-label">Tonnes of CO₂<br>emitted (wasted)</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num" id="stat-homes">0</div>
+        <div class="stat-label">Egyptian homes<br>powered for a day</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Personal calculator -->
+  <div class="calc-section">
+    <h3 class="calc-header">What is your share?</h3>
+    <p class="calc-sub">Egypt's waste is collective — but it has individual contributors. Answer four questions and we'll show you your personal ledger.</p>
+
+    <div class="calc-grid">
+      <div class="calc-item">
+        <label>AC usage per day</label>
+        <select id="ac-hours">
+          <option value="0">No AC</option>
+          <option value="4">~4 hours (moderate)</option>
+          <option value="8" selected>~8 hours (typical)</option>
+          <option value="14">~14 hours (heavy)</option>
+          <option value="20">Always on</option>
+        </select>
+      </div>
+      <div class="calc-item">
+        <label>Devices left on standby</label>
+        <select id="standby">
+          <option value="0">None — I unplug</option>
+          <option value="2">1-2 devices</option>
+          <option value="5" selected>3-5 devices</option>
+          <option value="8">6+ devices</option>
+        </select>
+      </div>
+      <div class="calc-item">
+        <label>Household size</label>
+        <select id="household">
+          <option value="1">Solo (1 person)</option>
+          <option value="3">Small (2-3)</option>
+          <option value="5" selected>Family (4-5)</option>
+          <option value="7">Large (6+)</option>
+        </select>
+      </div>
+      <div class="calc-item">
+        <label>How many lights left on?</label>
+        <select id="lights">
+          <option value="0">None — LEDs, all off</option>
+          <option value="2" selected>1-2 rooms</option>
+          <option value="5">Half the house</option>
+          <option value="8">Most rooms always lit</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="calc-submit" onclick="calculateGuilt()">CALCULATE MY DEBT</button>
+
+    <div class="guilt-result" id="guilt-result">
+      <div class="guilt-headline" id="guilt-headline"></div>
+      <div class="guilt-line" id="guilt-line1"></div>
+      <div class="guilt-line" id="guilt-line2"></div>
+      <div class="guilt-line" id="guilt-line3"></div>
+      <div class="guilt-action" id="guilt-action"></div>
+    </div>
+  </div>
+
+  <div class="section-nav">
+    <a class="nav-link" onclick="showSection('temp-section')">→ Try the 2°C Countdown</a>
+    <a class="nav-link" onclick="showLanding()">← Back to Home</a>
+  </div>
+  <div class="galala-credit">Galala University · College of Engineering · Earth Day 2026</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 2: 2°C COUNTDOWN
+════════════════════════════════════════════ -->
+<div id="temp-section" class="section">
+  <div class="temp-hero">
+    <div class="temp-bg"></div>
+
+    <div class="section-badge temp-badge">Tool 02 · Behavioral Simulation</div>
+
+    <h2 class="temp-title">Your Skin is the Thermometer</h2>
+    <p class="temp-subtitle">
+      The 2°C limit isn't a number on a chart. It is the temperature of human skin under a fever that never breaks.
+      Every choice you make today moves that number.
+    </p>
+
+    <!-- Skin thermometer visual -->
+    <div class="skin-container">
+      <div class="skin-label">Global temperature above pre-industrial baseline</div>
+      <div class="skin-visual">
+        <svg class="skin-arm-svg" viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="armGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#c4956a" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#a07040" stop-opacity="0.9"/>
+            </linearGradient>
+            <linearGradient id="heatGrad" x1="0" y1="1" x2="0" y2="0" id="heatGrad">
+              <stop offset="0%" stop-color="#2d6e8f"/>
+              <stop offset="50%" stop-color="#f0891a"/>
+              <stop offset="100%" stop-color="#d94f1e"/>
+            </linearGradient>
+            <clipPath id="armClip">
+              <path d="M100,40 Q80,40 75,60 L70,220 Q68,260 80,280 Q90,300 140,300 Q190,300 200,280 Q212,260 210,220 L205,60 Q200,40 180,40 Z"/>
+            </clipPath>
+          </defs>
+          <!-- Arm silhouette -->
+          <path d="M100,40 Q80,40 75,60 L70,220 Q68,260 80,280 Q90,300 140,300 Q190,300 200,280 Q212,260 210,220 L205,60 Q200,40 180,40 Z"
+                fill="url(#armGrad)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+          <!-- Heat fill inside arm (clipped) -->
+          <rect id="heat-fill-rect" x="70" y="40" width="142" height="260" clip-path="url(#armClip)"
+                fill="url(#heatGrad)" opacity="0.5" transform="translate(0,260) scale(1,0)"/>
+          <!-- Vein lines -->
+          <path d="M120,80 Q118,120 122,160 Q124,200 120,240" stroke="rgba(45,110,143,0.3)" stroke-width="1.5" fill="none"/>
+          <path d="M160,80 Q158,110 162,150 Q164,190 159,240" stroke="rgba(45,110,143,0.3)" stroke-width="1.5" fill="none"/>
+          <!-- Scale marks -->
+          <line x1="200" y1="90" x2="212" y2="90" stroke="rgba(245,240,232,0.3)" stroke-width="1"/>
+          <text x="216" y="94" fill="rgba(245,240,232,0.4)" font-family="Space Mono, monospace" font-size="9">+3.0°C</text>
+          <line x1="200" y1="140" x2="212" y2="140" stroke="rgba(245,240,232,0.3)" stroke-width="1"/>
+          <text x="216" y="144" fill="rgba(245,240,232,0.4)" font-family="Space Mono, monospace" font-size="9">+2.0°C</text>
+          <line x1="200" y1="190" x2="212" y2="190" stroke="rgba(245,240,232,0.3)" stroke-width="1"/>
+          <text x="216" y="194" fill="rgba(245,240,232,0.4)" font-family="Space Mono, monospace" font-size="9">+1.5°C</text>
+          <line x1="200" y1="240" x2="212" y2="240" stroke="rgba(245,240,232,0.3)" stroke-width="1"/>
+          <text x="216" y="244" fill="rgba(245,240,232,0.4)" font-family="Space Mono, monospace" font-size="9">+1.1°C</text>
+          <!-- Current indicator line -->
+          <line id="temp-indicator" x1="68" y1="220" x2="210" y2="220" stroke="#f0891a" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/>
+        </svg>
+        <div class="temp-reading">
+          <div class="temp-val" id="temp-val">+1.1°C</div>
+          <div class="temp-unit">ABOVE BASELINE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Behavior tracker -->
+  <div class="behavior-section">
+    <h3 class="behavior-header">Your choices today</h3>
+    <p class="behavior-sub">Toggle the behaviors that apply to you. Watch the temperature shift. Each action has a real CO₂ footprint — we calculated them from Egyptian grid data (0.45 kg CO₂/kWh).</p>
+
+    <div class="behavior-grid" id="behavior-grid">
+      <!-- Items injected by JS -->
+    </div>
+
+    <div class="temp-result" id="temp-result">
+      <div class="temp-result-headline" id="temp-result-headline">Current trajectory: <span id="traj-label" style="color: var(--gold)">Baseline</span></div>
+      <div class="temp-result-body" id="temp-result-body"></div>
+      <div class="timeline-bar">
+        <div class="timeline-fill" id="timeline-fill" style="width: 37%; background: var(--gold);"></div>
+      </div>
+      <div class="timeline-labels">
+        <span>Today 2026</span>
+        <span>+1.5°C tipping</span>
+        <span>+2.0°C critical</span>
+        <span>+3.0°C collapse</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-nav">
+    <a class="nav-link" onclick="showSection('debt-section')">← Try the Debt Clock</a>
+    <a class="nav-link" onclick="showLanding()">↑ Back to Home</a>
+  </div>
+  <div class="galala-credit">Galala University · College of Engineering · Earth Day 2026</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
 <script>
-    // View Management Logic
-    function switchView(viewId) {
-        // Hide all views
-        document.querySelectorAll('.view').forEach(view => {
-            view.classList.remove('active');
-        });
-        // Show target view
-        document.getElementById(viewId).classList.add('active');
-        
-        // Reset dashboard if switching away from simulator
-        if(viewId === 'view-landing') {
-            document.getElementById('dashboard').style.display = 'none';
-        }
-    }
+// ─── DATA CONSTANTS (sourced from EEHC, CAPMAS, Ember 2024) ───
+// Egypt total electricity production: ~160 TWh/year
+// Grid T&D losses (FY22/23): ~18.2% = ~29.1 TWh/year
+// Behavioral/inefficiency waste (standby, over-cooling, obsolete appliances): ~15% = ~24 TWh/year
+// Total annual waste: ~53.1 TWh = 53,100,000,000 kWh/year
+// Per second: 53,100,000,000 / 31,536,000 = ~1,684 kWh/s = ~1.684 MWh/s
+// CO2 intensity Egypt grid: ~0.45 kg CO2/kWh
+// Average Egyptian household consumption: ~200 kWh/month = ~6.67 kWh/day
 
-    // Energy Calculation Logic
-    function calculateEnergy(name, watts, note) {
-        // Core Math (Assuming 8 hours of use/standby per day over 365 days)
-        const hoursPerYear = 8 * 365; 
-        const kwhPerYear = (watts * hoursPerYear) / 1000;
-        
-        // Gamified Metrics Math
-        const costEGP = kwhPerYear * 1.5; // Roughly 1.5 EGP per kWh
-        const coffees = Math.round(costEGP / 40); // Assuming ~40 EGP per coffee
-        const kmDriven = Math.round(kwhPerYear * 4); // EV equivalent distance
+const WASTE_KWH_PER_SECOND = 1684; // kWh/s total waste
+const CO2_KG_PER_KWH = 0.45;
+const HOME_KWH_PER_DAY = 6.67;
+const EGYPT_POP = 106_000_000;
+const WASTE_MWH_PER_SECOND = WASTE_KWH_PER_SECOND / 1000;
 
-        // Update DOM Elements
-        document.getElementById('dashboard').style.display = 'block';
-        document.getElementById('dev-name').innerText = name;
-        document.getElementById('dev-note').innerText = `"${note}"`;
-        document.getElementById('wattage').innerText = watts;
-        document.getElementById('kwh').innerText = kwhPerYear.toFixed(1);
-        document.getElementById('coffee').innerText = coffees;
-        document.getElementById('drive').innerText = kmDriven;
-    }
+let pageLoadTime = Date.now();
+let debtInterval = null;
+
+// Current global temp (2025 data: ~1.15°C above pre-industrial baseline, IPCC)
+const CURRENT_TEMP_BASE = 1.15;
+const MAX_TEMP = 3.0;
+
+// ─── NAVIGATION ───
+function showSection(id) {
+  document.getElementById('landing').style.display = 'none';
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('backBtn').classList.add('visible');
+  window.scrollTo(0, 0);
+
+  if (id === 'debt-section') startDebtClock();
+  if (id === 'temp-section') initBehaviors();
+}
+
+function showLanding() {
+  document.getElementById('landing').style.display = 'flex';
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('backBtn').classList.remove('visible');
+  if (debtInterval) { clearInterval(debtInterval); debtInterval = null; }
+  pageLoadTime = Date.now();
+  window.scrollTo(0, 0);
+}
+
+// ─── LANDING TICKER ───
+function updateLandingTicker() {
+  const elapsed = (Date.now() - pageLoadTime) / 1000;
+  const wastedMWh = (WASTE_MWH_PER_SECOND * elapsed).toFixed(1);
+  document.getElementById('landing-waste').textContent =
+    `Egypt has wasted ${wastedMWh} MWh in the time you've had this tab open`;
+}
+setInterval(updateLandingTicker, 500);
+
+// ─── DEBT CLOCK ───
+function startDebtClock() {
+  if (debtInterval) clearInterval(debtInterval);
+  pageLoadTime = Date.now();
+
+  debtInterval = setInterval(() => {
+    const elapsed = (Date.now() - pageLoadTime) / 1000;
+    const wastedMWh = WASTE_MWH_PER_SECOND * elapsed;
+    const wastedKWh = wastedMWh * 1000;
+    const co2Tonnes = (wastedKWh * CO2_KG_PER_KWH) / 1000;
+    const homes = Math.floor(wastedKWh / HOME_KWH_PER_DAY);
+
+    document.getElementById('debt-kwh').textContent = wastedMWh.toFixed(3);
+    document.getElementById('stat-co2').textContent = co2Tonnes.toFixed(3);
+    document.getElementById('stat-homes').textContent = homes.toLocaleString();
+  }, 50);
+}
+
+// ─── GUILT CALCULATOR ───
+function calculateGuilt() {
+  const acHours = parseInt(document.getElementById('ac-hours').value);
+  const standbyDevices = parseInt(document.getElementById('standby').value);
+  const householdSize = parseInt(document.getElementById('household').value);
+  const lights = parseInt(document.getElementById('lights').value);
+
+  // Egyptian AC: ~1.5 kW average unit
+  const acKwh = acHours * 1.5;
+  // Standby: ~5W per device average
+  const standbyKwh = standbyDevices * 0.005 * 24;
+  // Lights: ~60W old bulb average, 4h/day
+  const lightKwh = lights * 0.06 * 4;
+  // Base per person in Egypt: ~5.6 kWh/day (2036 kWh/yr ÷ 365)
+  const basePerPerson = 5.6;
+  const totalHouseholdKwh = (basePerPerson * householdSize) + acKwh + standbyKwh + lightKwh;
+
+  // Waste portion (inefficiency overhead ~20% behavioral)
+  const wasteKwh = totalHouseholdKwh * 0.20 + standbyKwh;
+  const co2PerDay = (totalHouseholdKwh * CO2_KG_PER_KWH).toFixed(2);
+  const co2PerYear = (totalHouseholdKwh * CO2_KG_PER_KWH * 365 / 1000).toFixed(2);
+  const wasteEGP = (wasteKwh * 365 * 1.5).toFixed(0); // ~1.5 EGP/kWh residential avg
+  const shareOfNational = ((totalHouseholdKwh / (householdSize || 1)) / (WASTE_KWH_PER_SECOND * 86400 / EGYPT_POP) * 100).toFixed(1);
+
+  // Intensity score
+  let headlineText, actionText;
+  const totalWasteScore = acHours + standbyDevices + lights;
+
+  if (totalWasteScore <= 2) {
+    headlineText = "You're one of Egypt's better-performing households.";
+    actionText = "Your footprint is below average. Your next move: pressure your building to switch communal lighting to LEDs. That single change across Egypt's 26 million households would recover ~2.8 TWh/year.";
+  } else if (totalWasteScore <= 8) {
+    headlineText = "Your household is draining Egypt's grid faster than it can breathe.";
+    actionText = "Turning off standby devices and raising your AC from 18°C to 24°C would cut your household's CO₂ output by ~38%. That's the equivalent of planting 12 trees — but you don't need a shovel.";
+  } else {
+    headlineText = "If Egypt had 10 million households like yours, the grid would collapse by 2028.";
+    actionText = "Your consumption sits in the top 20% of Egyptian households. Replacing 5 old appliances with energy-rated ones saves ~900 kWh/year. The EGP saved pays for itself in under 18 months.";
+  }
+
+  document.getElementById('guilt-headline').textContent = headlineText;
+  document.getElementById('guilt-line1').innerHTML =
+    `Your household consumes roughly <strong>${totalHouseholdKwh.toFixed(1)} kWh/day</strong>, emitting <strong>${co2PerDay} kg CO₂</strong> today.`;
+  document.getElementById('guilt-line2').innerHTML =
+    `Annualized: <strong>${co2PerYear} tonnes CO₂/year</strong> — equivalent to driving an average car <strong>${Math.round(co2PerYear * 4000)} km</strong>.`;
+  document.getElementById('guilt-line3').innerHTML =
+    `The inefficiency overhead in your usage costs an estimated <strong>${Number(wasteEGP).toLocaleString()} EGP/year</strong> in wasted electricity that never did useful work.`;
+  document.getElementById('guilt-action').textContent = actionText;
+
+  const result = document.getElementById('guilt-result');
+  result.classList.add('show');
+  result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ─── BEHAVIOR DATA ───
+const behaviors = [
+  // [id, icon, name, detail, deltaTemp_personal (millideg contribution), good/harmful, impact label]
+  { id: 'ac24', icon: '❄️', name: 'AC set to 24°C, not 18°C', detail: 'Each °C raised = ~6% energy saving. Egyptian ACs often run at 16-18°C.', delta: -0.0008, type: 'good', impact: '−0.0008°C', label: 'saves ~1.2 kWh/day' },
+  { id: 'standby', icon: '🔌', name: 'Devices left on standby', detail: 'Egyptian homes average 5+ standby devices drawing ~40W continuously.', delta: +0.0006, type: 'harmful', impact: '+0.0006°C', label: 'wastes ~1 kWh/day' },
+  { id: 'led', icon: '💡', name: 'Replaced all bulbs with LEDs', detail: 'A 60W incandescent vs 9W LED, same light. 85% less energy.', delta: -0.0005, type: 'good', impact: '−0.0005°C', label: 'saves ~0.8 kWh/day' },
+  { id: 'oldac', icon: '🌀', name: 'Using AC older than 10 years', detail: 'Pre-2015 Egyptian ACs consume 40-60% more than modern inverter units.', delta: +0.0012, type: 'harmful', impact: '+0.0012°C', label: 'wastes ~2.5 kWh/day' },
+  { id: 'solar', icon: '☀️', name: 'Solar water heater installed', detail: 'Water heating = 25% of household energy in Egypt. Solar eliminates it.', delta: -0.0015, type: 'good', impact: '−0.0015°C', label: 'saves ~3 kWh/day' },
+  { id: 'phantom', icon: '👻', name: 'Phone chargers unplugged when idle', detail: 'An idle charger draws 0.5W. Small, but across Egypt = 53 MW wasted.', delta: -0.0002, type: 'good', impact: '−0.0002°C', label: 'saves ~0.1 kWh/day' },
+  { id: 'washer', icon: '🫧', name: 'Washing machine on cold cycle', detail: 'Hot water heating = 90% of washer energy. Cold works equally well.', delta: -0.0006, type: 'good', impact: '−0.0006°C', label: 'saves ~1.1 kWh/day' },
+  { id: 'fridge', icon: '🧊', name: 'Fridge door opened frequently', detail: 'Each open = motor kicks in. 20+ daily opens add ~0.5 kWh overhead.', delta: +0.0003, type: 'harmful', impact: '+0.0003°C', label: 'wastes ~0.5 kWh/day' },
+  { id: 'curtains', icon: '🪟', name: 'Closed curtains during day heat', detail: 'Blocking direct sun reduces AC load by 15-25% in Cairo summers.', delta: -0.0007, type: 'good', impact: '−0.0007°C', label: 'saves ~1.3 kWh/day' },
+];
+
+let activeStates = {};
+
+function initBehaviors() {
+  const grid = document.getElementById('behavior-grid');
+  grid.innerHTML = '';
+  behaviors.forEach(b => {
+    activeStates[b.id] = false;
+    const el = document.createElement('div');
+    el.className = 'behavior-item';
+    el.id = 'beh-' + b.id;
+    el.innerHTML = `
+      <div class="beh-icon">${b.icon}</div>
+      <div class="beh-text">
+        <div class="beh-name">${b.name}</div>
+        <div class="beh-detail">${b.detail} <em style="color:var(--gold);font-size:11px">${b.label}</em></div>
+      </div>
+      <div class="beh-impact" style="color:${b.type === 'good' ? 'var(--green)' : 'var(--ember)'}">${b.impact}</div>
+      <div class="beh-toggle"></div>
+    `;
+    el.addEventListener('click', () => toggleBehavior(b.id));
+    grid.appendChild(el);
+  });
+  updateTempDisplay();
+}
+
+function toggleBehavior(id) {
+  activeStates[id] = !activeStates[id];
+  const b = behaviors.find(x => x.id === id);
+  const el = document.getElementById('beh-' + id);
+  if (activeStates[id]) {
+    el.classList.add(b.type === 'good' ? 'on' : 'harmful');
+  } else {
+    el.classList.remove('on', 'harmful');
+  }
+  updateTempDisplay();
+}
+
+function updateTempDisplay() {
+  let delta = 0;
+  behaviors.forEach(b => {
+    if (activeStates[b.id]) delta += b.delta;
+  });
+
+  const currentTemp = Math.max(0.8, Math.min(MAX_TEMP, CURRENT_TEMP_BASE + delta * 1000));
+  // Animate thermometer
+  const tempPct = (currentTemp - 0.8) / (MAX_TEMP - 0.8);
+  const fillHeight = tempPct * 260;
+  const rect = document.getElementById('heat-fill-rect');
+  rect.setAttribute('transform', `translate(0, ${260 - fillHeight}) scale(1, ${fillHeight / 260})`);
+
+  // Indicator line Y position: maps 0.8→240, 3.0→50
+  const indicatorY = 240 - (tempPct * 190);
+  document.getElementById('temp-indicator').setAttribute('y1', indicatorY);
+  document.getElementById('temp-indicator').setAttribute('y2', indicatorY);
+
+  // Color
+  let color = '#2d6e8f';
+  if (currentTemp > 1.5) color = '#f0891a';
+  if (currentTemp > 2.0) color = '#d94f1e';
+
+  const tempVal = document.getElementById('temp-val');
+  tempVal.textContent = '+' + currentTemp.toFixed(2) + '°C';
+  tempVal.style.color = color;
+
+  // Result panel
+  const progress = tempPct * 100;
+  document.getElementById('timeline-fill').style.width = Math.min(progress, 100) + '%';
+  document.getElementById('timeline-fill').style.background = color;
+
+  let trajLabel, resultBody;
+  if (currentTemp < 1.15) {
+    trajLabel = 'Better than today 🟢';
+    resultBody = `Your daily choices would <strong>slow Egypt's contribution</strong> to warming. If all 106 million Egyptians did the same, Egypt's power sector emissions would fall by an estimated <strong>18–22%</strong> within a decade — enough to recover ~0.02°C of global trajectory by 2050.`;
+  } else if (currentTemp < 1.5) {
+    trajLabel = 'Near the 1.5°C wire 🟡';
+    resultBody = `You're close to the Paris Agreement's critical threshold. At <strong>${currentTemp.toFixed(2)}°C</strong>, coral reef die-offs accelerate and North Africa faces 30% increased drought frequency. Your current habits are not enough — <strong>2–3 more green choices</strong> would pull you below the line.`;
+  } else if (currentTemp < 2.0) {
+    trajLabel = 'Past the 1.5°C limit 🟠';
+    resultBody = `You've crossed the threshold. At <strong>${currentTemp.toFixed(2)}°C</strong>, the Nile Delta faces chronic flooding risk, and Egypt's agricultural output drops an estimated <strong>12–18%</strong> by 2060. The human body experiences a fever at this margin — <strong>the Earth does too.</strong>`;
+  } else {
+    trajLabel = 'Catastrophic trajectory 🔴';
+    resultBody = `At <strong>${currentTemp.toFixed(2)}°C</strong>, we are past the point of managed adaptation. Egypt loses an estimated <strong>30% of its Mediterranean coastline</strong>, summer temperatures in Cairo regularly exceed <strong>48°C</strong>, and water security collapses. This arm is burning. <strong>Change everything.</strong>`;
+  }
+
+  document.getElementById('traj-label').textContent = trajLabel;
+  document.getElementById('traj-label').style.color = color;
+  document.getElementById('temp-result-body').innerHTML = resultBody;
+}
 </script>
-
 </body>
 </html>
