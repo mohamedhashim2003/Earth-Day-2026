@@ -1,6 +1,6 @@
 # 🌍 Virtual Energy Kiosk
 
-**Galala University Earth Day Ideas Competition 2026 Submission**
+**Winner of Galala University Earth Day Ideas Competition 2026**
 
 An interactive, gamified web platform designed to raise community awareness about energy conservation by translating abstract electrical consumption into relatable, real-world metrics.
 
